@@ -88,14 +88,33 @@ function actualizarProductosDOM(){
 
 actualizarProductosDOM();
 
-// asd
+// -------------CARRITO
 
+var listaCarrito = [];
+
+//--detectar click en producto y agregarlos al array listaCarrito
+//--controla tambien los repetidos
 for (let i in listaProductos){
     for (let r in listaProductos[i].precio){
-        const boton = document.querySelector(`btn${listaProductos[i].nombre}-${r}`);
-        //console.log(`btn${listaProductos[i].nombre}-${r}`)
-        boton.addEventListener("click",()=>{
-            console.log(`btn${listaProductos[i].nombre}-${r}`);
+        const boton = document.querySelector(`.btn${listaProductos[i].nombre}-${r}`);
+        boton.addEventListener("click", () => {
+            if (listaCarrito.length==0){
+                listaCarrito.push({"nom" : `${listaProductos[i].nombre}-${r}`, "cant":1})
+            }else{
+                let agregar=true;
+                for (let p in listaCarrito){
+                    if ( listaCarrito[p].nom == `${listaProductos[i].nombre}-${r}`){
+                        listaCarrito[p].cant++;
+                        agregar = false;
+                        break;
+                    }
+                }
+                if (agregar){listaCarrito.push({"nom" : `${listaProductos[i].nombre}-${r}`, "cant":1})}
+            }
+            console.log(listaCarrito);
         });
     }
 }
+
+//--generar elementos del carrito en DOM
+

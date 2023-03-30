@@ -47,7 +47,7 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    background-color: rgb(235, 235, 235);
+    background-color: rgba(235, 235, 235, 0.7);
   }
   .container .products .header-products{
     width: 100%;
@@ -164,7 +164,7 @@
     width: 100%;
     height: 100%;
     
-    background-color: rgb(235, 235, 235);
+    background-color: rgba(235, 235, 235, 0.7);
   }
   .container .order .header-order{
     width: 100%;
@@ -207,6 +207,18 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+  }
+  .container .order .order-container li{
+    list-style: none;
+    padding: 1% 2%;
+
+    display: flex;
+  }
+  .container .order .order-container li p{
+    width: 200px;
+    text-align: center;
+    padding: 5px;
+    background-color: rgb(255, 243, 227);
   }
   
   /*  */
