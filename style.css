@@ -108,7 +108,9 @@
     padding: 10px 15px;
     color: white;
     font-size: 22px;
-
+  }
+  .container .products .container-products .prod-fav{
+    box-shadow: 0px 0px 8px 3px rgba(118, 255, 90, 0.75);
   }
   .container .products .container-products .card .name{
     background-color: rgba(0, 0, 0, 0.6);
@@ -209,18 +211,33 @@
     padding: 20px;
   }
   .container .order .order-container li{
+    width: 100%;
     list-style: none;
     padding: 1% 2%;
 
     display: flex;
+    align-items: center;
   }
   .container .order .order-container li p{
     width: 200px;
+    flex-grow: 1;
     text-align: center;
     padding: 5px;
     background-color: rgb(255, 243, 227);
   }
-  
+  .container .order .order-container li button{
+    width: 20px;
+    height: 25px;
+    position:absolute;
+    right: 4.5%;
+  }
+  /* ---- */
+  .container .order .formulario{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding: 2% 6%;
+  }
   /*  */
   .tl-1{
     transition: all .5s ease;

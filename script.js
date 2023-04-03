@@ -11,10 +11,12 @@ container.classList.add("tl-1");
 btn.addEventListener("click", () => {
     container.classList.toggle("tl-1");
     container.classList.toggle("tl-2");
+    actualizarProductosCarrito();
 })
 btn2.addEventListener("click", () => {
     container.classList.toggle("tl-1");
     container.classList.toggle("tl-2");
+    actualizarProductosCarrito();
 })
 
 //CARGA DE PRODUCTOS
@@ -41,9 +43,21 @@ crearProducto("Dionisio","hamburguesa, solo cheddar",90,"dionisioIMG",{simple:50
 crearProducto("Hades","Lomo, lechuga, tomate y huevo",1150,"hadesIMG",{simple:600,doble:800});
 crearProducto("Cronos","Lomo, panceta, cheddar y barbacoa",1150,"cronosIMG",{simple:600,doble:800});
 
-console.log(listaProductos)
-
 const contProd = document.querySelector(".container-products");
+
+//Producto favorito
+let prodFav = "";
+let mayor = 0;
+for (let i=0; i<localStorage.length; i++){
+    let clave = localStorage.key(i);
+    // console.log(clave);
+    if (localStorage.getItem(clave)>mayor){
+        mayor = localStorage.getItem(clave);
+        prodFav = localStorage.key(i);
+    }
+}
+console.log(prodFav)
+// ----------------------
 
 function actualizarProductosDOM(){ 
     for (let i=0; i<listaProductos.length ;i++){
@@ -72,6 +86,9 @@ function actualizarProductosDOM(){
         titulo.appendChild(texto);
         comprar.appendChild(titulo);
 
+        if (`click${listaProductos[i].nombre}` == prodFav){
+            card.classList.add("prod-fav");
+        }
 
         for(let indice in listaProductos[i].precio){
             //console.log(indice+" "+listaProductos[i].precio[indice]);
@@ -89,7 +106,7 @@ function actualizarProductosDOM(){
 actualizarProductosDOM();
 
 // -------------CARRITO
-
+//--array vacio para almacenar los elementos del carrito
 var listaCarrito = [];
 
 //--detectar click en producto y agregarlos al array listaCarrito
@@ -99,17 +116,24 @@ for (let i in listaProductos){
         const boton = document.querySelector(`.btn${listaProductos[i].nombre}-${r}`);
         boton.addEventListener("click", () => {
             if (listaCarrito.length==0){
-                listaCarrito.push({"nom" : `${listaProductos[i].nombre}-${r}`, "cant":1})
+                listaCarrito.push({"nom" : `${listaProductos[i].nombre}-${r}`, "cant":1,"precio":`${listaProductos[i].precio[r]}`})
+                //contar clicks para el local Storage
+                localStorage.setItem(`click${listaProductos[i].nombre}`,parseInt(localStorage.getItem(`click${listaProductos[i].nombre}`))+parseInt(1));
             }else{
                 let agregar=true;
                 for (let p in listaCarrito){
                     if ( listaCarrito[p].nom == `${listaProductos[i].nombre}-${r}`){
                         listaCarrito[p].cant++;
+                        listaCarrito[p].precio = listaProductos[i].precio[r] * listaCarrito[p].cant
                         agregar = false;
                         break;
                     }
                 }
-                if (agregar){listaCarrito.push({"nom" : `${listaProductos[i].nombre}-${r}`, "cant":1})}
+                if (agregar){listaCarrito.push({"nom" : `${listaProductos[i].nombre}-${r}`, "cant":1,"precio":`${listaProductos[i].precio[r]}`})}
+                //contar clicks para el local Storage
+                if (localStorage.getItem(`click${listaProductos[i].nombre}`) >=0){
+                    localStorage.setItem(`click${listaProductos[i].nombre}`,parseInt(localStorage.getItem(`click${listaProductos[i].nombre}`))+parseInt(1));
+                }
             }
             console.log(listaCarrito);
         });
@@ -117,4 +141,79 @@ for (let i in listaProductos){
 }
 
 //--generar elementos del carrito en DOM
+
+function actualizarProductosCarrito(){ 
+
+    //------Limpiar la lista
+    let container = document.querySelector(".order-container")
+    let hijos = document.querySelector(".order-container").children
+    while (hijos.length>1) {
+        container.removeChild(container.lastChild);
+    }
+
+    //------- crear listaCarrito en el DOM
+    for (let i=0; i<listaCarrito.length ;i++){
+
+        let linea = document.createElement("LI");
+        linea.classList.add("linea");
+        container.appendChild(linea)
+
+        let cant = document.createElement("P");
+        cant.classList.add("cant");
+        var texto = document.createTextNode(`${listaCarrito[i].cant}`);
+        cant.appendChild(texto);
+        linea.appendChild(cant)
+
+        let name = document.createElement("P");
+        name.classList.add("name");
+        var texto = document.createTextNode(`${listaCarrito[i].nom}`);
+        name.appendChild(texto);
+        linea.appendChild(name)
+
+        let precio = document.createElement("P");
+        precio.classList.add("precio");
+        var texto = document.createTextNode(`$${listaCarrito[i].precio}`);
+        precio.appendChild(texto);
+        linea.appendChild(precio);
+
+        var btnEliminar = document.createElement("BUTTON");
+        btnEliminar.classList.add("btnEliminar");
+        btnEliminar.addEventListener("click",()=>{
+            listaCarrito.splice(i,1);
+            //console.log(`eliminar${i}`)
+            actualizarProductosCarrito();
+        });
+        
+        var texto = document.createTextNode(`X`);
+        btnEliminar.appendChild(texto);
+        linea.appendChild(btnEliminar)
+    }
+    console.log(btnEliminar);
+    //----crear linea total
+    let linea = document.createElement("LI");
+        linea.classList.add("linea");
+        container.appendChild(linea)
+
+        let cant = document.createElement("P");
+        cant.classList.add("cant");
+        var texto = document.createTextNode(`-`);
+        cant.appendChild(texto);
+        linea.appendChild(cant)
+
+        let name = document.createElement("P");
+        name.classList.add("name");
+        var texto = document.createTextNode(`Total`);
+        name.appendChild(texto);
+        linea.appendChild(name)
+
+        let precio = document.createElement("P");
+        precio.classList.add("precio");
+        let total = 0;
+        for (let p in listaCarrito){
+            total = total+parseInt(listaCarrito[p].precio);
+        }
+        var texto = document.createTextNode(`$${total}`);
+        precio.appendChild(texto);
+        linea.appendChild(precio)
+}
 
