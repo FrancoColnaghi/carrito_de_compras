@@ -1,0 +1,82 @@
+[
+    {
+        "descripcion":"Pan de queso, hamburguesa, cheddar y panceta",
+        "img":"zeusIMG",
+        "nombre":"Zeus",
+        "precio":{
+            "doble":"900",
+            "simple":"1100",
+            "triple": "1300"
+        }
+    },
+    {
+        "descripcion":"hamburguesa, salsa criolla, lechuga, huevo, jamon y cheddar",
+        "img":"heraIMG",
+        "nombre":"Hera",
+        "precio":{
+            "doble":"900",
+            "simple":"1100",
+            "triple": "1300"
+        }
+    },
+    {
+        "descripcion":"hamburguesa, barbacoa, cheddar y panceta",
+        "img":"geaIMG",
+        "nombre":"Gea",
+        "precio":{
+            "doble":"800",
+            "simple":"1050",
+            "triple": "1200"
+        }
+    },
+    {
+        "descripcion":"hamburguesa, pimientos asados y queso azul",
+        "img":"afroditaIMG",
+        "nombre":"Afrodita",
+        "precio":{
+            "doble":"800",
+            "simple":"1050",
+            "triple": "1200"
+        }
+    },
+    {
+        "descripcion":"hamburguesa, reucula y queso tybo",
+        "img":"ateneaIMG",
+        "nombre":"Atenea",
+        "precio":{
+            "doble":"800",
+            "simple":"1050",
+            "triple": "1200"
+        }
+    },
+    {
+        "descripcion":"hamburguesa, solo cheddar",
+        "img":"dionisioIMG",
+        "nombre":"Dionisio",
+        "precio":{
+            "doble":"700",
+            "simple":"900",
+            "triple": "1000"
+        }
+    },
+    {
+        "descripcion":"lomo, lechuga huevo y tomate",
+        "img":"hadesIMG",
+        "nombre":"Hades",
+        "precio":{
+            "doble":"800",
+            "simple":"1050",
+            "triple": "1200"
+        }
+    },
+    {
+        "descripcion":"lomo barbacoa panceta y cheddar",
+        "img":"cronosIMG",
+        "nombre":"Cronos",
+        "precio":{
+            "doble":"800",
+            "simple":"1050",
+            "triple": "1200"
+        }
+    }
+]

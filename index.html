@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cliente</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="body">
   <header>
     <div class="name">PARRILLA EL OLIMPO</div>
-    <a href="/admin.html">ir a admin</a>
   </header>
   <div class="container tl-1">
     <section class="products">
@@ -57,12 +57,15 @@
         </li> -->
       </div>
       <div class="formulario">
-        <input type="text" placeholder="Nombre">
-        <input type="text" placeholder="Direccion">
+        <input type="text" placeholder="Nombre" class="inputNom">
+        <input type="text" placeholder="Direccion" class="inputDir">
         <button class="btnForm">Confirmar Pedido</button>
       </div>
     </section>
   </div>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="script.js"></script>
 </body>
 </html>
