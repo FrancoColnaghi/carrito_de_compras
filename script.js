@@ -34,7 +34,6 @@ function actualizarProductosDOM(){
         }
 
         for(let indice in listaProductos[i].precio){
-            //console.log(indice+" "+listaProductos[i].precio[indice]);
             let btn = document.createElement("BUTTON");
             btn.classList.add(`btn${listaProductos[i].nombre}-${indice}`);
             texto = document.createTextNode(`${indice} - $${listaProductos[i].precio[indice]}`);
@@ -102,7 +101,6 @@ function actualizarProductosCarrito(){
         btnEliminar.appendChild(texto);
         linea.appendChild(btnEliminar)
     }
-    console.log(btnEliminar);
     //----crear linea total
     let linea = document.createElement("LI");
         linea.classList.add("linea");
@@ -162,9 +160,8 @@ fetch('productos.json')
   .then(response => response.json())
   .then(data => {
     listaProductos = data;
-    console.log(listaProductos);
-    //Producto favorito
 
+    //Producto favorito
     let mayor = 0;
     for (let i=0; i<localStorage.length; i++){
         let clave = localStorage.key(i);
@@ -199,8 +196,6 @@ fetch('productos.json')
                         background: "linear-gradient(to right, #00b09b, #96c93d)",
                         },
                     }).showToast();
-                //control
-                console.log(listaCarrito)
                 }else{
             //si el carrito ya contiene productos
                     let agregar=true;
